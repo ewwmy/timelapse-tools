@@ -34,9 +34,9 @@ This script will generate video from the regular shots.
 #### Script parameters
 
 * `path`: root dir of the timelapse project which contains `src` folder. The output video will be placed here
-* `filemask`: ffmpeg `glob` pattern, for ex. 'IMG_*.JPG' (for regular Canon EOS shots) or 'Y*.jpg' (Xiaomi Yi Camera)
+* `filemask`: ffmpeg `glob` pattern, for ex. 'IMG_\*.JPG' (for regular Canon EOS shots) or 'Y\*.jpg' (Xiaomi Yi Camera)
 * `format`: use the one of listed above or just `WIDTHxHEIGHT`, for ex. `1920x1440`. Using predefined resolution is recommended for better compability. See
-* `fps`: frames per second in the output video, must be a positive integer, for ex. `30`. It's recommended to use `20`, `24`, 30` or `60` for better compability
+* `fps`: frames per second in the output video, must be a positive integer, for ex. `30`. It's recommended to use `20`, `24`, `30` or `60` for better compability
 * `crop`: defines which side of the frame (`top`, `middle` or `bottom`) will be used in the output video if the in and out ratio doesn't correspond of each other.
 
 ### Most popular video formats with the 16:9 ratio recommended for using
