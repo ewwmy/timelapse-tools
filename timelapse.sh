@@ -58,12 +58,14 @@ if [ -d "$TIMELAPSE_DIR" ]; then
 		# check if the first image filename is not empty and is the regular file
 		if [ -n "$FIRST_IMAGE" ] && [ -f "$TIMELAPSE_DIR/src/$FIRST_IMAGE" ]; then
 
-			# TODO: add timestamp of the first image to the video output filename
+			# getting the width and height of the first image in 'src' directory
+			IN_W=`exiftool -ImageWidth $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 2 | xargs`
+			IN_H=`exiftool -ImageHeight $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 2 | xargs`
 
-			# getting the width and height of the first image in 'src' directory (for the future functionality)
-			IN_W=`ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=nw=1:nk=1 $TIMELAPSE_DIR/src/$FIRST_IMAGE`
-			IN_H=`ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=nw=1:nk=1 $TIMELAPSE_DIR/src/$FIRST_IMAGE`
-			# validation of these parameters is not needed because even with the invalid files it will be output a valid 640x400 resolution
+			EXIF_DATETIME=`exiftool -CreateDate $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 2 | xargs``exiftool -CreateDate $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 3 | xargs``exiftool -CreateDate $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 4 | xargs``exiftool -CreateDate $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 5 | xargs``exiftool -CreateDate $TIMELAPSE_DIR/src/$FIRST_IMAGE | cut -d ":" -f 6 | xargs`
+			EXIF_DATE=`echo $EXIF_DATETIME | cut -d " " -f 1`
+			EXIF_TIME=`echo $EXIF_DATETIME | cut -d " " -f 2`
+			EXIF_DATETIME=`echo $EXIF_DATE"_"$EXIF_TIME`
 
 			# getting the output resolution
 			case "$FORMAT" in
@@ -129,7 +131,7 @@ if [ -d "$TIMELAPSE_DIR" ]; then
 			# TODO: Addition: Create/rename files using sequential file naming image###.jpg then use sequence wildcards like -i image%03d.jpg as input. Create Batch script for Windows.
 
 			# generating the timelapse
-			ffmpeg -r $FPS -f image2 -pattern_type glob -i "$TIMELAPSE_DIR/src/$FILEMASK" -filter:v "crop=in_w:in_h/($OUT_W/$OUT_H*in_h/in_w):0:$CROP_Y_START" -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -s $RESOLUTION -q 0 "$TIMELAPSE_DIR/timelapse_"$RESOLUTION"x"$FPS"_"$CROP".mp4"
+			ffmpeg -r $FPS -f image2 -pattern_type glob -i "$TIMELAPSE_DIR/src/$FILEMASK" -filter:v "crop=in_w:in_h/($OUT_W/$OUT_H*in_h/in_w):0:$CROP_Y_START" -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -s $RESOLUTION -q 0 "$TIMELAPSE_DIR/timelapse_"$EXIF_DATETIME"_"$RESOLUTION"x"$FPS"_"$CROP".mp4"
 
 		else
 			echo "The 'src' directory doesn't contain any matching files"
