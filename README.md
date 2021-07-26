@@ -17,7 +17,7 @@ This script will generate video from the regular shots.
 
 ### Requirements
 * Linux OS (ffmpeg glob pattens aren't supported in Windows, see https://stackoverflow.com/a/31513542 for more information)
-* `ffmpeg` utility installed.
+* `ffmpeg` and `exiftool` utilities installed.
 
 ### Usage
 
