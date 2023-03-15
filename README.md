@@ -25,7 +25,7 @@ This script will generate video from the regular shots.
 1. Create directory for the timelapse with any name you want, e.g. `~/timelapse1`. The output videos will be saved here.
 2. Create `src` directory in the main timelapse directory and put there your images you need to process (e.g. `~/timelapse1/src`). Don't put there any other files!
 3. Run script with your specific parameters as described in the **Script parameters** section (you need to pass `~/timelapse1` as `path` parameter of script).
-4. Enjoy a clear and magnificent timelapse video with the human-readable filename! :-)
+4. Enjoy a clear and magnificent timelapse video with the human-readable filename! 🙂
 
 #### Script overview
 
@@ -35,7 +35,7 @@ This script will generate video from the regular shots.
 
 * `path`: root dir of the timelapse project which contains `src` folder. The output video will be placed here
 * `filemask`: ffmpeg `glob` pattern, for ex. 'IMG_\*.JPG' (for regular Canon EOS shots) or 'Y\*.jpg' (Xiaomi Yi Camera)
-* `format`: use the one of listed above or just `WIDTHxHEIGHT`, for ex. `1920x1440`. Using predefined resolution is recommended for better compatibility. See
+* `format`: use the one of listed above or just `WIDTHxHEIGHT`, for ex. `1920x1440`. Using predefined resolution is recommended for better compatibility. See the table below to discover most used formats.
 * `fps`: frames per second in the output video, must be a positive integer, for ex. `30`. It's recommended to use `20`, `24`, `30` or `60` for better compatibility
 * `crop`: defines which side of the frame (`top`, `middle` or `bottom`) will be used in the output video if the in and out ratio doesn't correspond of each other.
 
